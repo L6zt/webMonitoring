@@ -1,7 +1,7 @@
 import {on} from '../event'
 import {LOAD_SOURCE_ERROR, SCRIPT_EXECUTE_ERROR, AJAX_STATUS_ERROR, AJAX_NETWORK_ERROR } from './type'
 import ajax from '../ajax'
-const HOST = ''
+const host = ''
 const uploadAjaxNetWorkErrorApi = `${host}`
 const uploadLoadSourceErrorAPi = `${host}`
 const uploadScriptExecuteErrorApi = `${host}`
