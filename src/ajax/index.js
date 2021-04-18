@@ -56,7 +56,7 @@ class Ajax {
   _request(option) {
     const { _xhr } = this;
     _xhr.open(option.type, option.url, option.async);
-    this.setRequestHeader(option.headers);
+    this._setRequestHeaders(option.headers);
     this._transFormatData;
     _xhr.onreadystatechange = function() {
       if (_xhr.status === _xhr.DONE && _xhr.status === 200) {

@@ -4,7 +4,8 @@ const config = {
   output: {
     filename: "montoring.js",
     library: "montoring",
-    libraryTarget: "umd"
+    libraryTarget: "umd",
+    crossOriginLoading: 'anonymous'
   },
   module: {
     rules: [
