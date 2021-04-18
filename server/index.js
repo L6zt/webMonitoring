@@ -1,19 +1,26 @@
-const koa = require('koa')
-const getDb = require('./db.config')
-const app = new koa()
-app.use(async(ctx) => {
-  const {db, close} = await getDb()
-  const collection = db.collection('error')
-  const data = await new Promise((r, j) => {
-    collection.insertMany([
-      {docIndex: 1}, {docIndex: 2}, {docIndex: 3}
-    ], (err, result) => {
+const { SourceMapConsumer } = require('source-map')
+const path = require('path')
+const fs = require('fs')
+
+const readSourceMap =  async (fileName)  => {
+  return new Promise((r, j) => {
+    fs.readFile(fileName,  'utf8', (err, data) => {
       if (err) throw err
-      r(result)
-      close()
+       else {
+        r(data)
+       }
     })
   })
-  ctx.res.setHeader('content-type', 'application/json')
-  ctx.body = data
-})
-app.listen(7000)
+}
+
+(async () => {
+  const rawSourceMap = JSON.parse( await readSourceMap('./sourceMap/app.bundle.js.map'))
+  const whatever = await SourceMapConsumer.with(rawSourceMap, null, consumer => {
+    
+  console.log(consumer.originalPositionFor({
+    line: 1,
+    column: 4419
+  }));
+ 
+});
+})()
